@@ -10,7 +10,6 @@
             INCLUDE "CONST.X68"
             INCLUDE "SYSCONST.X68"
             INCLUDE "SYSTEM.X68"
-            INCLUDE "SYSVARS.X68"
     
     
 START
@@ -34,9 +33,7 @@ START
         
 ; --- SYNC -----------------------------------------------------------
 
-.WINT       TST.B   (SCRINTCT)
-            BEQ     .WINT
-            CLR.B   (SCRINTCT)
+
             
             
 ; --- PLOT -----------------------------------------------------------
@@ -53,6 +50,8 @@ START
             INCLUDE "SYSVARS.X68"
     
             END    START
+
+
 
 *~Font name~Fixedsys~
 *~Font size~18~
