@@ -27,10 +27,10 @@ SCRINIT
 ; MODIFIES : NONE
 ; ------------------------------------------------------------------------------
 
-        MOVEM.L      DO-D1,-(A7)
+        MOVEM.L      D0-D1,-(A7)
         ; SET SCREEN RESOLUTION
         MOVE.B      #33,D0
-        MOVE.L      #SCRWIDTH<<16|SCRHEIGHT, D1
+        MOVE.L      #SCRWIDTH<<16|SCRHEIGH, D1
         TRAP        #15
         
         ; SET WINDOWED MODE
@@ -147,6 +147,7 @@ KBDUPD
 
         
         
+
 
 *~Font name~Fixedsys~
 *~Font size~18~
