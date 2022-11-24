@@ -23,7 +23,7 @@ MAPPLOT
 ; MODIFIES - NONE
 ; -------------------------------------------------------------------------------------------
 
-    MOVEM.L D0-D6/A0-A2,-(A7)
+    MOVEM.L D0-D7/A0-A2,-(A7)
     
     CLR.L   D0
     CLR.L   D1
@@ -32,16 +32,43 @@ MAPPLOT
     LEA     M1COLORS,A1
     
     MOVE.W  #15,D5
+    MOVE.W  #15,D7
     
-.PAINTMAP
+    CLR.L   D2
+    CLR.L   D4
+    CLR.L   D6
     
-    MOVE.B  (A0)+,D0
-    LSL.B   #2,D0
-    MOVE.L  (A1,D0),D1  ;
+    ADD.W   #16,D4
+    
+.PAINTY    
+    
+    CLR.L   D3              ;SETS FIRST TILE OF A ROW
+    ADD.W   #16,D3          ;SETS RIGHT X
+    CLR.L   D6              ;SETS LEFT X
+    
+.PAINTX
+    
+    MOVE.B  (A0)+,D0        ;MOVE TILE TYPE TO D0
+    LSL.B   #2,D0           ;2 TIMES D0
+    MOVE.L  (A1,D0),D1      ;GET COLOR IN D0 FROM M1COLORS
     
     SETCOLOR    ;SET COLOR MACRO
     
+    CLR.L   D1
+    MOVE.L  D6,D1           ;LEFT X COORD SAVED ON D6
     
+    MOVE.B  #87,D0          ;PAINT RECTANGLE
+    TRAP    #15
+    
+    ADD.W   #16,D3          ;MOVE D3 TO NEXT TILE (RIGHT X)
+    ADD.W   #16,D6          ;MOVE D6 TO NEXT TILE (LEFT X)
+    
+    DBRA    .PAINTX,D5      ;LOOP 16 TIMES (COLUMNS)
+    
+    ADD.W   #16,D2          ;MOVE UPPER Y 1 ROW DOWN
+    ADD.W   #16,D4          ;MOVE LOWER Y 1 ROW DOWN
+    
+    DBRA    .PAINTY,D7      ;LOOP 16 TIMES (ROWS)
     
     RTS
     
@@ -77,6 +104,7 @@ MAP115      DC.B 1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1
     SIMHALT
 
     END    START
+
 
 
 *~Font name~Fixedsys~
