@@ -1,3 +1,20 @@
+; ===========================================================================================
+; TITLE    : MAP MANAGEMENT
+; AUTHOR   : 
+; COMMENTS :
+; HISTORY  :
+; ==========================================================================================
+
+
+SETCOLOR    MACRO
+            MOVE.B  #80,D0
+            TRAP    #15
+            MOVE.B  #81,D0
+            TRAP    #15
+            ENDM
+
+
+
 ;-----------------------------------------------------------
 MAPPLOT
 ; PLOT MAP
@@ -8,12 +25,32 @@ MAPPLOT
 
     MOVEM.L D0-D6/A0-A2,-(A7)
     
+    CLR.L   D0
+    CLR.L   D1
+    
+    LEA     MAP1,A0
+    LEA     M1COLORS,A1
+    
+    MOVE.W  #15,D5
+    
+.PAINTMAP
+    
+    MOVE.B  (A0)+,D0
+    LSL.B   #2,D0
+    MOVE.L  (A1,D0),D1  ;
+    
+    SETCOLOR    ;SET COLOR MACRO
+    
+    
+    
+    RTS
+    
     
 
 ;--- MAPS -------------------------------------------
 
 MAP1        DC.L MAP100,MAP101,MAP102,MAP103,MAP104,MAP105,MAP106,MAP107,MAP108,MAP109,MAP110
-            DC.L MAP112,MAP113,MAP114,MAP115
+            DC.L MAP112,MAP113,MAP114,MAP115,M1COLORS
                     ;SAND    ;BUSH
 M1COLORS    DC.L $0054DCFF,$0015AC21
 
@@ -40,6 +77,7 @@ MAP115      DC.B 1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1
     SIMHALT
 
     END    START
+
 
 *~Font name~Fixedsys~
 *~Font size~18~
