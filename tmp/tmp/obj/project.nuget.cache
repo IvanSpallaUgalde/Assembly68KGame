@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "2z7D4EAUvEmyb7giFnCa3LfRknJjSBocNqWuHqItjqjYqas38VYZRwefBzW9tA20Hz1MdkDi/S6lI2HAQYkBhw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Rubén\\Desktop\\tmp\\tmp\\tmp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rubén\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\Rubén\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
