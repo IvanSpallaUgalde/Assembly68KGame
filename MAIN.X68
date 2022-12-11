@@ -10,6 +10,8 @@
             INCLUDE "CONST.X68"
             INCLUDE "SYSCONST.X68"
             INCLUDE "SYSTEM.X68"
+            INCLUDE "MAP.X68"
+            
     
     
 START
@@ -18,6 +20,7 @@ START
 
             ORI.W   #$0700,SR
             JSR     SYSINIT
+            JSR     MAPINIT
 
 
 .LOOP
@@ -26,7 +29,7 @@ START
 
 ; READ INPUT DEVICES
 
-            TRAP    #KBDUPTN
+            ;TRAP    #KBDUPTN
     
 ; UPDATE GAME LOGIC
 
@@ -38,9 +41,12 @@ START
             
 ; --- PLOT -----------------------------------------------------------
    
-           TRAP     #SCRUPTN
-           
-           BRA      .LOOP
+            
+            JSR     MAPPLOT
+            
+            TRAP    #SCRUPTN
+            
+            BRA     .LOOP
 
 
 
@@ -50,6 +56,10 @@ START
             INCLUDE "SYSVARS.X68"
     
             END    START
+
+
+
+
 
 
 

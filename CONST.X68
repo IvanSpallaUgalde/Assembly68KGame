@@ -2,10 +2,20 @@
 ; GAME CONSTANTS
 ; ==============================================================================
 
-; --- ENEMY RELATED CONSTANTS ----------------------------------------------------
+; --- MPC RELATED CONSTANTS ----------------------------------------------------
 
-ENECOLO     EQU $000000FF
+MPCSPEED    EQU 3       ;MAGNITUDE OF THE MPC X AND Y VEL
 
+
+; --- ENEMY RELATED CONSTANTS --------------------------------------------------
+
+ENESPEED    EQU 3       ;MAGNITUDE OF THE ENEMY X AND Y VEL
+
+
+; --- MAP RELATED CONSTANTS ----------------------------------------------------
+
+TILESIZE    EQU 30      ;TILE SIDE SIZE
+COLORPOS    EQU 64      ;COLORS VECTOR POSITION 16x4 = 64
 *~Font name~Fixedsys~
 *~Font size~18~
 *~Tab type~1~

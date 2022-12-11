@@ -25,6 +25,7 @@ SCRUPTN     EQU 0
 KBDUPTN     EQU 1
 
 ; --- INTERRUPT NUMVERS -----------------------------------------------------
+
 *~Font name~Fixedsys~
 *~Font size~18~
 *~Tab type~1~
