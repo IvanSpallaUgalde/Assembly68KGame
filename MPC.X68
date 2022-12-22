@@ -51,16 +51,26 @@ MPCPLOT
 
     MOVEM.L D0-D7/A0-A2,-(A7)
     
+    LEA     MPC,A3
+    LEA     MPC,A0
     
+    MOVE.L  COLORPOS(A3),A1
+    MOVE.L  (A1),D1
     
+    SETCOLOR
+    
+    CLR.W   D1
+    CLR.W   D2
 
 
 
 ; --- MPC BITMAP -----------------------------------------------------------------------------
 
 MPC         DC.L MPC00,MPC01,MPC02,MPC03,MPC04,MPC05,MPC06,MPC07,MPC08,MPC09,MPC10
-            DC.L MPC
-
+            DC.L MPC11,MPC12,MP13,MP14,MP15,MPCOLOR
+;                    0         1          2         3         4         5   
+MPCOLOR     DC.B $00FF0000,$000A022F,$00482BCD,$0091336B,$005EEBFE,$0040E6FF
+ 
 MPC00       DC.B 0,0,0,0,0,1,1,1,0,1,1,0,0,0,0,0
 MPC01       DC.B 0,0,0,0,1,2,4,2,1,2,4,1,0,0,0,0
 MPC02       DC.B 0,0,1,1,1,2,2,4,4,4,4,1,1,1,0,0
@@ -83,6 +93,7 @@ MPC15       DC.B 0,0,0,0,0,0,0,0,1,2,2,1,0,0,0,0
 
 
     
+
 *~Font name~Fixedsys~
 *~Font size~18~
 *~Tab type~1~
