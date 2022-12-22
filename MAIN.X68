@@ -1,6 +1,7 @@
 *-----------------------------------------------------------
 * Title      :
 * Written by :
+            
 * Date       :
 * Description:
 *-----------------------------------------------------------
@@ -11,7 +12,7 @@
             INCLUDE "SYSCONST.X68"
             INCLUDE "SYSTEM.X68"
             INCLUDE "MAP.X68"
-            
+            INCLUDE "SCORE.X68"
     
     
 START
@@ -21,6 +22,7 @@ START
             ORI.W   #$0700,SR
             JSR     SYSINIT
             JSR     MAPINIT
+            JSR     SCOINIT
 
 
 .LOOP
@@ -41,8 +43,9 @@ START
             
 ; --- PLOT -----------------------------------------------------------
    
-            
+            JSR     SCOPLOT            
             JSR     MAPPLOT
+
             
             TRAP    #SCRUPTN
             
@@ -56,6 +59,7 @@ START
             INCLUDE "SYSVARS.X68"
     
             END    START
+
 
 
 

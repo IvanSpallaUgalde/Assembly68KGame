@@ -9,9 +9,10 @@
 SETCOLOR    MACRO
             MOVE.L D0,-(A7)
             
-            MOVE.B  #80,D0
-            TRAP    #15
             MOVE.B  #81,D0
+            TRAP    #15
+            CLR.L   D1
+            MOVE.B  #80,D0
             TRAP    #15
             
             MOVE.L (A7)+,D0
@@ -145,6 +146,7 @@ MAP116      DC.B 1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1
 
 
     
+
 
 
 *~Font name~Fixedsys~
