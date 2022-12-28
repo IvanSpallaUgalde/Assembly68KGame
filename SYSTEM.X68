@@ -43,14 +43,14 @@ SCRINIT
         TRAP        #15
         
         ; ENABLE DOUBLE BUFFER
-        ;MOVE.B      #92,D0
-        ;MOVE.B      #17,D1
-        ;TRAP        #15
+        MOVE.B      #92,D0
+        MOVE.B      #17,D1
+        TRAP        #15
         
         ; CLEAR HIDDEN BUFFER
-        ;MOVE.W      #$FF00,D1
-        ;MOVE.B      #11,D0
-        ;TRAP        #15
+        MOVE.W      #$FF00,D1
+        MOVE.B      #11,D0
+        TRAP        #15
         
         
         MOVEM.L     (A7)+,D0-D1
@@ -152,6 +152,7 @@ KBDUPD
 
         
         
+
 
 
 

@@ -43,10 +43,9 @@ START
             
             
 ; --- PLOT -----------------------------------------------------------
-   
             JSR     SCOPLOT
-            JSR     MPCPLOT
             JSR     MAPPLOT
+            JSR     MPCPLOT
             
             
             
@@ -64,6 +63,8 @@ START
             INCLUDE "SYSVARS.X68"
     
             END    START
+
+
 
 
 

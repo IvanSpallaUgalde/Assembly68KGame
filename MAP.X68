@@ -51,7 +51,7 @@ MAPPLOT
 ; MODIFIES - NONE
 ; -------------------------------------------------------------------------------------------
 
-    MOVEM.L D0-D7/A0-A2,-(A7)
+    MOVEM.L D0-D7/A0-A3,-(A7)
     
     LEA     MAP1,A3
     LEA     MAP1,A0
@@ -114,6 +114,8 @@ MAPPLOT
     DBRA    D5,.PAINTX
     DBRA    D6,.PAINTY
     
+    MOVEM.L (A7)+,D0-D7/A0-A3
+    
     RTS
     
     
@@ -146,6 +148,7 @@ MAP116      DC.B 1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1
 
 
     
+
 
 
 

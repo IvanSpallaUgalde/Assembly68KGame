@@ -36,7 +36,10 @@ MPCUPD
 ; OUTPUT   : NONE
 ; MODIFIES : NONE
 ;-----------------------------------------------------------
-
+    MOVE.W (MPCPOSY),D0
+    BTST.B 
+CHECKPOS 
+        
     
     RTS
     
@@ -49,7 +52,7 @@ MPCPLOT
 ; MODIFIES - NONE
 ; -------------------------------------------------------------------------------------------
 
-    MOVEM.L D0-D7/A0-A2,-(A7)
+    MOVEM.L D0-D7/A0-A3,-(A7)
     
     LEA     MPC,A3
     LEA     MPC,A0
@@ -73,7 +76,7 @@ MPCPLOT
     TRAP    #15
 
     
-    MOVEM.L (A7)+,D0-D7/A0-A2
+    MOVEM.L (A7)+,D0-D7/A0-A3
     RTS
     
     
@@ -107,6 +110,8 @@ MPC15       DC.B 0,0,0,0,0,0,0,0,1,2,2,1,0,0,0,0
 
 
     
+
+
 
 
 

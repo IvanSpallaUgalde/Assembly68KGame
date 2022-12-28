@@ -22,6 +22,11 @@ SCOPLOT
 ; ------------------------------------------------------------------------------
 
             MOVEM.L D0-D1/A1,-(A7)
+            ; SET BACKGROUND COLOR
+            MOVE.B  #81,D0
+            MOVE.L  #SCOFCOL,D1
+            TRAP    #15
+
             ; SET FIRST LINE POSITION
             MOVE.B  #11,D0
             MOVE.W  #SCOLINE1,D1
@@ -51,6 +56,7 @@ SCOPLOT
             RTS
 .TXT1       DC.B    'X :',0
 .TXT2       DC.B    'SCORE :',0
+
 
 
 
