@@ -18,10 +18,18 @@ TILESIZE    EQU 30      ;TILE SIDE SIZE
 COLORPOS    EQU 64      ;COLORS VECTOR POSITION 16x4 = 64
 
 ; --- SCORE RELATED CONSTANTS --------------------------------------------------
+
 SCOLINE1    EQU $4101
 SCOLINE2    EQU $4102
 
 
+; --- MPC REALTED CONSTANTS ----------------------------------------------------
+
+MPCSIZE     EQU 1
+MPCLX       EQU 232     ;LEFT STARTING X
+MPCRX       EQU 248     ;RIGHT STARTING X
+MPCLY       EQU 248     ;LOWER SARTING Y
+MPCUY       EQU 232     ;UPPER STARTING Y
 
 
 

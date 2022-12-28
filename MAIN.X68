@@ -13,6 +13,7 @@
             INCLUDE "SYSTEM.X68"
             INCLUDE "MAP.X68"
             INCLUDE "SCORE.X68"
+            INCLUDE "MPC.X68"
     
     
 START
@@ -43,9 +44,13 @@ START
             
 ; --- PLOT -----------------------------------------------------------
    
-            JSR     SCOPLOT            
+            JSR     SCOPLOT
+            JSR     MPCPLOT
             JSR     MAPPLOT
-
+            
+            
+            
+    
             
             TRAP    #SCRUPTN
             
@@ -59,6 +64,8 @@ START
             INCLUDE "SYSVARS.X68"
     
             END    START
+
+
 
 
 

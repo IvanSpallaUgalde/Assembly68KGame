@@ -1,21 +1,21 @@
 ; ===========================================================================================
-; TITLE    : MAP MANAGEMENT
+; TITLE    : MPC MANAGEMENT
 ; AUTHOR   : 
 ; COMMENTS :
 ; HISTORY  :
 ; ==========================================================================================
 
 
-SETCOLOR    MACRO
-            MOVE.L D0,-(A7)
+SETMPCCOLOR     MACRO
+                MOVE.L D0,-(A7)
             
-            MOVE.B  #80,D0
-            TRAP    #15
-            MOVE.B  #81,D0
-            TRAP    #15
+                MOVE.B  #80,D0
+                TRAP    #15
+                MOVE.B  #81,D0
+                TRAP    #15
             
-            MOVE.L (A7)+,D0
-            ENDM
+                MOVE.L (A7)+,D0
+                ENDM
             
             
 ;-----------------------------------------------------------
@@ -57,19 +57,33 @@ MPCPLOT
     MOVE.L  COLORPOS(A3),A1
     MOVE.L  (A1),D1
     
-    SETCOLOR
+    SETMPCCOLOR
     
-    CLR.W   D1
-    CLR.W   D2
+    CLR.L   D1
+    CLR.L   D2
+    CLR.L   D3
+    CLR.L   D4
+    CLR.L   D0
+    MOVE.W  #MPCLX,D1
+    MOVE.W  #MPCUY,D2
+    MOVE.W  #MPCRX,D3
+    MOVE.W  #MPCLY,D4
+    
+    MOVE.B  #87,D0
+    TRAP    #15
 
-
-
+    
+    MOVEM.L (A7)+,D0-D7/A0-A2
+    RTS
+    
+    
 ; --- MPC BITMAP -----------------------------------------------------------------------------
 
 MPC         DC.L MPC00,MPC01,MPC02,MPC03,MPC04,MPC05,MPC06,MPC07,MPC08,MPC09,MPC10
-            DC.L MPC11,MPC12,MP13,MP14,MP15,MPCOLOR
-;                    0         1          2         3         4         5   
-MPCOLOR     DC.B $00FF0000,$000A022F,$00482BCD,$0091336B,$005EEBFE,$0040E6FF
+            DC.L MPC11,MPC12,MPC13,MPC14,MPC15,MPCOLOR
+            
+                    ;0        ;1        ;2        ;3        ;4        ;5   
+MPCOLOR     DC.L $00FF0000,$000A022F,$00482BCD,$0091336B,$005EEBFE,$0040E6FF
  
 MPC00       DC.B 0,0,0,0,0,1,1,1,0,1,1,0,0,0,0,0
 MPC01       DC.B 0,0,0,0,1,2,4,2,1,2,4,1,0,0,0,0
@@ -93,6 +107,9 @@ MPC15       DC.B 0,0,0,0,0,0,0,0,1,2,2,1,0,0,0,0
 
 
     
+
+
+
 
 *~Font name~Fixedsys~
 *~Font size~18~
