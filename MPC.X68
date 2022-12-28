@@ -36,11 +36,57 @@ MPCUPD
 ; OUTPUT   : NONE
 ; MODIFIES : NONE
 ;-----------------------------------------------------------
-    MOVE.W (MPCPOSY),D0
-    BTST.B 
-CHECKPOS 
-        
+    MOVE.W  (MPCPOSX),D1
+    MOVE.W  (MPCPOSY),D0
+    ;UPDATE CORDINATE
+    BTST.B  #4,(KBDVAL)
+    BEQ     .CHKDWN
+    SUB.W   #MPCSPEED,D0
+.CHKDWN
+    BTST.B  #6,(KBDVAL)
+    BEQ     .CHKLFT
+    ADD.W   #MPCSPEED,D0
+.CHKLFT       
+    BTST.B  #5,(KBDVAL)
+    BEQ     .CHKRGT
+    SUB.W   #MPCSPEED,D1
+.CHKRGT 
+    BTST.B  #7,(KBDVAL)
+    BEQ     .CHKRGT
+    ADD.W   #MPCSPEED,D1
     
+    ;COLLISIONS
+    CMP.W #0,D0
+    BGE .UP
+    ADD.W #MPCSPEED,D0
+.UP
+    CMP.W #0,D1
+    BGE .DOWN
+    ADD.W #MPCSPEED,D1
+.DOWN
+    CMP.W #480,D0
+    BLE .RIGHT
+    SUB.W #MPCSPEED,D0
+.RIGHT
+    CMP.W #480,D1
+    BLE .MAPA
+    SUB.W #MPCSPEED,D1
+.MAPA
+    CLR.L D2
+    CLR.L D3
+    ;D3->Y,D2->X
+    MOVE.W D0,D3
+    MOVE.W D1,D2
+    DIVU.W #30,D2   ;X/30
+    DIVU.W #30,D3   ;Y/30
+    MULU.W #4,D3
+    LEA MAP1,A6    
+    ADD.W D3,A6
+    ADD.W D2,A6
+    MOVE.W (A6),D3
+    CMP.B #0,D3
+    BEQ
+.
     RTS
     
     
