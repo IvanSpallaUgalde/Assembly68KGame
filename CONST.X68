@@ -5,11 +5,13 @@
 ; --- MPC RELATED CONSTANTS ----------------------------------------------------
 
 MPCSPEED    EQU 3       ;MAGNITUDE OF THE MPC X AND Y VEL
-
+MPCSIZE     EQU 16      ;SIZE OF MAIN CHARACTER
+MPCTILE     EQU 1
 
 ; --- ENEMY RELATED CONSTANTS --------------------------------------------------
 
 ENESPEED    EQU 3       ;MAGNITUDE OF THE ENEMY X AND Y VEL
+ENEMSIZE    EQU 16      ;SIZE OF ENEMY
 
 
 ; --- MAP RELATED CONSTANTS ----------------------------------------------------
@@ -21,15 +23,6 @@ COLORPOS    EQU 64      ;COLORS VECTOR POSITION 16x4 = 64
 SCOFCOL     EQU $00000000 
 SCOLINE1    EQU $4101
 SCOLINE2    EQU $4102
-
-
-; --- MPC REALTED CONSTANTS ----------------------------------------------------
-
-MPCSIZE     EQU 1
-MPCLX       EQU 232     ;LEFT STARTING X
-MPCRX       EQU 248     ;RIGHT STARTING X
-MPCLY       EQU 248     ;LOWER SARTING Y
-MPCUY       EQU 232     ;UPPER STARTING Y
 
 
 

@@ -11,6 +11,11 @@ SCORE   DS.W 1
 
 MPCPOSX DS.W 1
 MPCPOSY DS.W 1
+
+;--- ENEMY RELATED VARIBALES ---------------------------------
+ENEMPOSX DS.W 1
+ENEMPOSY DS.W 1
+
 *~Font name~Courier New~
 *~Font size~16~
 *~Tab type~1~

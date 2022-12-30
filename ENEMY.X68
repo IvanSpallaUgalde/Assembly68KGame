@@ -1,37 +1,39 @@
 ; ===========================================================================================
-; TITLE    : MPC MANAGEMENT
+; TITLE    : ENEMY MANAGEMENT
 ; AUTHOR   : 
 ; COMMENTS :
 ; HISTORY  :
 ; ==========================================================================================
 
 
-SETMPCCOLOR     MACRO
-                MOVE.L D0,-(A7)
+SETENEMCOLOR     MACRO
+            MOVE.L D0,-(A7)
             
-                MOVE.B  #80,D0
-                TRAP    #15
-                MOVE.B  #81,D0
-                TRAP    #15
+            MOVE.B  #81,D0
+            TRAP    #15
+            CLR.L   D1
+            MOVE.L  #$00FF0000,D1
+            MOVE.B  #80,D0
+            TRAP    #15
             
-                MOVE.L (A7)+,D0
+            MOVE.L (A7)+,D0
                 ENDM
             
             
 ;-----------------------------------------------------------
-MPCINIT
+ENEMINIT
 ; INITIALIZE THE MAIN PLAYABLE CHARACTER
 ; INPUT    : NONE
 ; OUTPUT   : NONE
 ; MODIFIES : NONE
 ;-----------------------------------------------------------
-    MOVE.W #232,(MPCPOSX)
-    MOVE.W #232,(MPCPOSY)
+   MOVE.W #232,(ENEMPOSX)
+   MOVE.W #10,(ENEMPOSY)         
     
     RTS
     
 ;-----------------------------------------------------------
-MPCUPD
+ENEMUPD
 ; UPDATE THE MAIN PLAYABLE CHARACTER
 ; INPUT    : NONE
 ; OUTPUT   : NONE
@@ -86,12 +88,11 @@ MPCUPD
     ADD.W D2,A6
     MOVE.W (A6),D3
     CMP.B #0,D3
-.
     RTS
     
     
 ;-----------------------------------------------------------
-MPCPLOT
+ENEMPLOT
 ; PLOT MAIN PLAYABLE CHARACTER
 ; INPUT    - NONE
 ; OUTPUT   - NONE
@@ -100,26 +101,25 @@ MPCPLOT
 
     MOVEM.L D0-D7/A0-A3,-(A7)
     
-    LEA     MPC,A3
-    LEA     MPC,A0
+    LEA     ENEM,A3
+    LEA     ENEM,A0
     
     MOVE.L  COLORPOS(A3),A1
     MOVE.L  (A1),D1
     
-    SETMPCCOLOR
+    SETENEMCOLOR
     
     CLR.L   D1
     CLR.L   D2
     CLR.L   D3
     CLR.L   D4
     CLR.L   D0
-    MOVE.W  (MPCPOSX),D1
-    MOVE.W  (MPCPOSY),D2
-    MOVE.W  (MPCPOSX),D3
-    ADD.W   #MPCSIZE,D3
-    MOVE.W  (MPCPOSY),D4
-    ADD.W   #MPCSIZE,D4
-    
+    MOVE.W  (ENEMPOSX),D1
+    MOVE.W  (ENEMPOSY),D2
+    MOVE.W  (ENEMPOSX),D3
+    ADD.W   #ENEMSIZE,D3
+    MOVE.W  (ENEMPOSY),D4
+    ADD.W   #ENEMSIZE,D4
     MOVE.B  #87,D0
     TRAP    #15
 
@@ -130,28 +130,28 @@ MPCPLOT
     
 ; --- MPC BITMAP -----------------------------------------------------------------------------
 
-MPC         DC.L MPC00,MPC01,MPC02,MPC03,MPC04,MPC05,MPC06,MPC07,MPC08,MPC09,MPC10
-            DC.L MPC11,MPC12,MPC13,MPC14,MPC15,MPCOLOR
+ENEM        DC.L ENEM00,ENEM01,ENEM02,ENEM03,ENEM04,ENEM05,ENEM06,ENEM07,ENEM08,ENEM09,ENEM10
+            DC.L ENEM11,ENEM12,ENEM13,ENEM14,ENEM15,ENEMCOLOR
             
-                    ;0        ;1        ;2        ;3        ;4        ;5   
-MPCOLOR     DC.L $00FF0000,$000A022F,$00482BCD,$0091336B,$005EEBFE,$0040E6FF
- 
-MPC00       DC.B 0,0,0,0,0,1,1,1,0,1,1,0,0,0,0,0
-MPC01       DC.B 0,0,0,0,1,2,4,2,1,2,4,1,0,0,0,0
-MPC02       DC.B 0,0,1,1,1,2,2,4,4,4,4,1,1,1,0,0
-MPC03       DC.B 0,1,2,3,1,2,2,2,2,2,2,1,2,4,1,0
-MPC04       DC.B 0,1,1,2,2,1,1,1,1,1,1,2,4,4,1,0
-MPC05       DC.B 0,0,1,1,2,4,4,4,4,4,4,4,2,1,0,0
-MPC06       DC.B 0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0
-MPC07       DC.B 0,0,0,1,1,1,2,1,2,1,2,1,1,0,0,0
-MPC08       DC.B 0,0,0,1,1,1,4,1,4,1,4,1,1,0,0,0
-MPC09       DC.B 0,0,0,0,1,2,4,4,4,4,4,1,2,1,0,0
-MPC10       DC.B 0,0,0,1,2,3,1,1,1,1,3,2,2,2,1,0
-MPC11       DC.B 0,0,0,1,2,5,0,0,0,3,1,2,1,4,4,1
-MPC12       DC.B 0,0,0,0,1,2,5,2,1,1,2,1,1,2,4,1
-MPC13       DC.B 0,0,0,0,1,3,3,1,1,3,3,1,0,1,1,0
-MPC14       DC.B 0,0,0,0,0,1,1,0,1,4,4,1,0,0,0,0
-MPC15       DC.B 0,0,0,0,0,0,0,0,1,2,2,1,0,0,0,0
+                        ;0        ;1        ;2        ;3        ;4        ;5          ;6      ;7
+ENEMCOLOR         DC.L $000000FF,$00271765,$004930DA,$0000B386,$0076288B,$0027734D,$00807584,$00EADFEF
+
+ENEM00            DC.B 0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0
+ENEM01            DC.B 0,0,0,0,0,1,1,6,7,7,1,1,0,0,0,0
+ENEM02            DC.B 0,0,0,0,1,6,7,7,7,7,7,6,1,0,0,0
+ENEM03            DC.B 0,0,0,1,6,6,6,7,7,7,6,6,6,1,0,0
+ENEM04            DC.B 0,0,0,1,1,6,6,6,6,6,6,6,1,1,0,0
+ENEM05            DC.B 0,0,0,1,6,1,1,1,1,1,1,1,6,1,0,0
+ENEM06            DC.B 0,0,0,1,1,6,7,7,7,7,7,6,1,1,0,0
+ENEM07            DC.B 0,0,0,1,5,1,1,1,5,1,1,1,5,1,0,0
+ENEM08            DC.B 0,0,0,1,5,3,2,5,3,5,2,3,5,1,0,0
+ENEM09            DC.B 0,0,1,4,1,5,3,3,3,3,3,5,1,4,1,0
+ENEM10            DC.B 0,1,2,2,2,1,1,5,5,5,1,1,2,2,2,1
+ENEM11            DC.B 0,1,2,1,2,2,4,1,1,1,4,2,1,3,3,1
+ENEM12            DC.B 0,1,3,3,1,4,2,2,2,2,2,4,1,5,3,1
+ENEM13            DC.B 0,1,3,5,1,6,6,4,1,4,6,6,6,1,1,0
+ENEM14            DC.B 0,0,1,1,0,1,1,1,0,1,6,7,7,1,0,0
+ENEM15            DC.B 0,0,0,0,0,0,0,0,0,1,5,3,5,1,0,0
 
 
 
@@ -165,8 +165,7 @@ MPC15       DC.B 0,0,0,0,0,0,0,0,1,2,2,1,0,0,0,0
 
 
 
-
-*~Font name~Fixedsys~
-*~Font size~18~
-*~Tab type~1~
+*~Font name~Courier New~
+*~Font size~10~
+*~Tab type~0~
 *~Tab size~4~

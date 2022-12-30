@@ -10,10 +10,20 @@
 
             INCLUDE "CONST.X68"
             INCLUDE "SYSCONST.X68"
+            ;INCLUDE "LIB/DMMCONST.X68"
+            ;INCLUDE "LIB/UTLCONST.X68"
+            ;INCLUDE "LIB/DMMCODE.X68"
             INCLUDE "SYSTEM.X68"
+            ;INCLUDE "LIB/AGLCODE.X68"
+            ;INCLUDE "LIB/UTLCODE.X68"
             INCLUDE "MAP.X68"
             INCLUDE "SCORE.X68"
             INCLUDE "MPC.X68"
+            INCLUDE "ENEMY.X68"
+           ;INCLUDE "LIB/AGLCODE.X68"
+           ;INCLUDE "LIB/DMMCODE.X68"
+           ;INCLUDE "LIB/DMMVARS.X68"
+           ;INCLUDE "LIB/UTLVARS.X68"
     
     
 START
@@ -24,6 +34,8 @@ START
             JSR     SYSINIT
             JSR     MAPINIT
             JSR     SCOINIT
+            JSR     MPCINIT
+            JSR     ENEMINIT
 
 
 .LOOP
@@ -46,12 +58,13 @@ START
             JSR     SCOPLOT
             JSR     MAPPLOT
             JSR     MPCPLOT
+            JSR     ENEMPLOT
             
             
             
     
             
-            TRAP    #SCRUPTN
+            ;TRAP    #SCRUPTN
             
             BRA     .LOOP
 
@@ -63,6 +76,8 @@ START
             INCLUDE "SYSVARS.X68"
     
             END    START
+
+
 
 
 
